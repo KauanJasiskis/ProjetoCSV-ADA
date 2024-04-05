@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.modelo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +23,10 @@ public class Produto {
         this.categoria = categoria;
         this.preco = preco;
 
+    }
+
+    public String formatar(FormatadorProduto formatador){
+        return formatador.formatar(this);
     }
 
 }
