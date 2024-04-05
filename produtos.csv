@@ -1,0 +1,15 @@
+id,nome,quantidade,categoria,preco
+1,Chocolate,20,Comida,5
+2,Melancia,15,Comida,4
+3,Arroz,22,Comida,18
+4,Feijao,16,Comida,14
+5,Sofa,6,Mobilia,1500
+6,Cadeira,20,Mobilia,200
+7,Mesa,9,Mobilia,400
+8,Rack,5,Mobilia,300
+9,Televisao,5,Eletrodomestico,3000
+10,Microondas,7,Eletrodomestico,400
+11,Geladeira,10,Eletrodomestico,4000
+12,Fogao,8,Eletrodomestico,2000
+13,Computador,2,Eletronico,6000
+14,Carro,3,Veiculo,40000.00
