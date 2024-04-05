@@ -39,9 +39,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<Produto> produtosNoBanco = select();
         List<Produto> produtosNoCSV = lerCsv();
         insert(produtosNoCSV);
+        List<Produto> produtosNoBanco = select();
         System.out.println("Total de categorias " + calcularCategorias(produtosNoBanco));
         Map<String, Long> quantidadePorCategoria = calcularQuantiadePorCategoria(produtosNoBanco);
         quantidadePorCategoria.forEach((categoria, quantidade) -> System.out.println(categoria + " : " + quantidade));
@@ -63,11 +63,10 @@ public class DemoApplication implements CommandLineRunner {
             String[] valores = linha.split(",");
             produtos.add(
                     new Produto(
-                            Integer.parseInt(valores[0]),
-                            valores[1],
-                            Integer.parseInt(valores[2]),
-                            valores[3],
-                            new BigDecimal(valores[4])
+                            valores[0],
+                            Integer.parseInt(valores[1]),
+                            valores[2],
+                            new BigDecimal(valores[3])
                     )
             );
         }
@@ -75,12 +74,10 @@ public class DemoApplication implements CommandLineRunner {
     }
 
     private void insert(List<Produto> produtos) {
-        String sql = "INSERT INTO produtos (id_do_produto, nome, quantidade, categoria, preco) VALUES (?, ?, ?, ?, ?)";
-        produtos.stream()
-                .filter(produto -> !idProdutoJaExistente(produto.getId()))
-                .forEach(produto -> {
-                    jdbcTemplate.update(sql, produto.getId(), produto.getNome(), produto.getQuantidade(), produto.getCategoria(), produto.getPreco());
-                });
+        String sql = "INSERT INTO produtos (nome, quantidade, categoria, preco) VALUES (?, ?, ?, ?)";
+        produtos.forEach(produto -> {
+            jdbcTemplate.update(sql, produto.getNome(), produto.getQuantidade(), produto.getCategoria(), produto.getPreco());
+        });
     }
 
     private Integer calcularCategorias(List<Produto> produtos) {
@@ -94,13 +91,6 @@ public class DemoApplication implements CommandLineRunner {
     private Map<String, Long> calcularQuantiadePorCategoria(List<Produto> produtos) {
         return produtos.stream().collect(Collectors.groupingBy(Produto::getCategoria, Collectors.counting()));
     }
-
-    private boolean idProdutoJaExistente(int id) {
-        String sql = "SELECT COUNT(*) FROM produtos WHERE id_do_produto = ?";
-        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
-        return count != null && count > 0;
-    }
-
     private List<Produto> select() {
         String sql = "SELECT * FROM produtos";
         RowMapper<Produto> rowMapper = ((rs, rowNum) -> new Produto(

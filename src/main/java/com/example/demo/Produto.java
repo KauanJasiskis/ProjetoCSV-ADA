@@ -10,11 +10,19 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto {
-    private Integer id ;
+    private Integer id;
     private String nome;
     private Integer quantidade;
     private String categoria;
 
     private BigDecimal preco;
+
+    public Produto(String nome, Integer quantidade, String categoria, BigDecimal preco) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.categoria = categoria;
+        this.preco = preco;
+
+    }
 
 }
