@@ -1,19 +1,18 @@
 Projeto CSV - ADA BootCamp
-Neste projeto foi decidido que iriamos manipular arquivos csv e realizar algumas operacoes sobre eles.
-As operacoes seriam:
-- Ler o arquivo CSV e salvar ele no banco
-A partir dos dados do banco utilizar funcoes stream para verificar:
-- a quantidade de categorias no estoque;
-- quantidade por categoria no estoque ;
-- verificar se algum produto tinha baixa quantidade no estoque;
-- calcular o valor medio de todos os produtos no estque;
-  Tambem inclui um metodo para gravar tudo que esta no banco em um arquivo CSV separado tambem.
-Como utilizar o programa:
-- Clone o repositorio todo do git;
--  dentro do terminal da sua IDE utilize o comando "docker-compose up";
--  -configure o seu banco de dados mysql ou dbgate baseado na image que esta no arquivo docker-compose;
--  Se quiser realizar alguma insercao no arquivo original basta modificar o arquivo que o programa vai inserir no banco "produtos.csv";
--  O arquivo novo que vai resgatar o que esta no banco e salvar nele é o "produtosDoBanco.csv";
--  O programa precisa que o arquivo esteja com uma linha adicional em baixo da ultima linha com dados informados para evitar bug!!
-  
+Neste projeto, decidimos manipular arquivos CSV e realizar algumas operações sobre eles.
 
+Operações:
+Ler o arquivo CSV e salvar no banco de dados.
+Utilizar funções de stream para realizar as seguintes verificações a partir dos dados do banco:
+Quantidade de categorias no estoque.
+Quantidade por categoria no estoque.
+Verificar se algum produto tem baixa quantidade no estoque.
+Calcular o valor médio de todos os produtos no estoque.
+Incluir um método para gravar todos os dados do banco em um arquivo CSV separado.
+Como utilizar o programa:
+Clone o repositório do git.
+No terminal da sua IDE, utilize o comando docker-compose up.
+Configure seu banco de dados MySQL ou utilize o DBGate com base na imagem especificada no arquivo docker-compose.
+Se desejar realizar alguma inserção no arquivo original, basta modificar o arquivo produtos.csv, e o programa inserirá os dados no banco.
+O arquivo para resgatar o que está no banco e salvá-lo nele é produtosDoBanco.csv.
+Certifique-se de que o arquivo tenha uma linha adicional abaixo da última linha com dados informados para evitar bugs.
