@@ -6,8 +6,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
-public class BancoProdutos  implements Banco<Produto> {
+public class BancoProdutos implements Banco<Produto> {
     private final JdbcTemplate jdbcTemplate;
 
     public BancoProdutos(JdbcTemplate jdbcTemplate) {
@@ -18,7 +19,12 @@ public class BancoProdutos  implements Banco<Produto> {
     public void insertNoBanco(List<Produto> produtos) {
         String sql = "INSERT INTO produtos (nome, quantidade, categoria, preco) VALUES (?, ?, ?, ?)";
         produtos.forEach(produto -> {
-            jdbcTemplate.update(sql, produto.getNome(), produto.getQuantidade(), produto.getCategoria(), produto.getPreco());
+            if (!existeProdutoComMesmoNomeEPreco(produto)) {
+                jdbcTemplate.update(sql, produto.getNome(), produto.getQuantidade(), produto.getCategoria(), produto.getPreco());
+            } else {
+                System.out.println("Produto: " + produto.getNome() + " Com o preco: " + produto.getPreco() + " Ja existe no banco, ignorando insert");
+            }
+
         });
     }
 
@@ -35,4 +41,11 @@ public class BancoProdutos  implements Banco<Produto> {
         ));
         return jdbcTemplate.query(sql, rowMapper);
     }
+
+    private boolean existeProdutoComMesmoNomeEPreco(Produto produto) {
+        String sql = "SELECT COUNT(*) FROM produtos WHERE nome = ? AND preco = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, produto.getNome(), produto.getPreco());
+        return count > 0;
+    }
+
 }

@@ -29,6 +29,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        //Se atente quando for rodar o programa
+        // para os dois arquivos csv terem um linha em branco
+        // a baixo do ultimo dado informado para o programa funcionar corretamente
         List<Produto> produtosNoCSV = service.resgatarProdutosNoArquivo();
         service.salvarProdutosNoBanco(produtosNoCSV);
         List<Produto> produtosNoBanco = service.resgatarProdutosNoBanco();

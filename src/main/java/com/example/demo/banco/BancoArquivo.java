@@ -6,4 +6,6 @@ public interface BancoArquivo<T>{
     void insertNoArquivo(List<T> itens);
 
     List<T> selectNoArquivo();
+
+
 }
