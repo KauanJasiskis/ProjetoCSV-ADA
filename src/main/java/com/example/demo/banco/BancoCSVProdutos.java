@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+
 @Component
 public class BancoCSVProdutos implements BancoArquivo<Produto> {
 
@@ -22,6 +21,7 @@ public class BancoCSVProdutos implements BancoArquivo<Produto> {
     private String arquivoCSVOriginal;
     @Value("${caminho.arquivo.csv2}")
     private String arquivoCSVNovo;
+
     public void insertNoArquivo(List<Produto> produtos) {
         try {
             FileWriter writer = new FileWriter(arquivoCSVNovo, true);
@@ -62,6 +62,7 @@ public class BancoCSVProdutos implements BancoArquivo<Produto> {
         }
         return produtos;
     }
+
     public List<Produto> selectNoArquivoNovo() {
         List<Produto> produtos = null;
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVNovo))) {
