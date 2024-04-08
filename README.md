@@ -2,7 +2,7 @@ Projeto CSV - ADA BootCamp
 Neste projeto foi decidido que iriamos manipular arquivos csv e realizar algumas operacoes sobre eles.
 As operacoes seriam:
 - Ler o arquivo CSV e salvar ele no banco
- A partir dos dados do banco utilizar funcoes stream para verificar:
+A partir dos dados do banco utilizar funcoes stream para verificar:
 - a quantidade de categorias no estoque;
 - quantidade por categoria no estoque ;
 - verificar se algum produto tinha baixa quantidade no estoque;
